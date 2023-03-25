@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: Swagger E-commerce
+  description: |-
+    This is a sample E-commerce Server
+
+    Some useful links:
+    - [The E-commerce API repository](https://github.com/swagger-api/swagger-petstore)
+
+  version: 1.0.11
+
+servers:
+  - url: https://localhost:8080/challenge/V1
+tags:
+  - name: product
+    description: Buy anything you need
+
+paths:
+  /products:
+    get:
+      tags:
+        - product
+      summary: Find all products
+      description: Find all products already on the catalog
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Product'          
+            application/xml:
+              schema:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid status value
+
+  /product:
+    post:
+      tags:
+        - product
+      summary: Create a new product on the catalog
+      description: Add a new product to the catalog
+      operationId: createProduct
+      requestBody:
+        description: Create a new product on the catalog
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '405':
+          description: Invalid input
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 641b17a181a59e0225bd7751
+        name:
+          type: string
+          example: Iphone
+        price:
+          type: number
+          example: 7.10
+        description:
+          type: string
+          example: Good cellphone with terrible battery but a good camera
+      xml:
+        name: product
