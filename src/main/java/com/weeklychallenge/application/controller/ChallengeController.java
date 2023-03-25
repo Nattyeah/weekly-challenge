@@ -20,13 +20,11 @@ public class ChallengeController {
     @Autowired
     private ChallengeService service;
 
-    //    GetAllProducts
     @GetMapping("/products")
     public ResponseEntity<List<ChallengeEntity>> getAllProducts() {
         return ResponseEntity.ok(service.getAllProducts());
     }
 
-    //    CreateNewProduct
     @PostMapping("/product")
     public ResponseEntity<ChallengeEntity> createNewProduct(@RequestBody ChallengeEntity request) {
         return new ResponseEntity<>(service.createProduct(request), HttpStatus.CREATED);
